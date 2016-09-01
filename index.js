@@ -64,7 +64,7 @@ Paypal.prototype.detail = function(token, payer, callback) {
 			if (err)
 				return callback(err, data);
 			data.ACK2 = data.ACK;
-			data.ACK = data.PAYMENTINFO_0_ACK; // Backward compatibility
+			data.ACK = data.ACK || data.PAYMENTINFO_0_ACK; // Backward compatibility
 			data.PAYMENTSTATUS = data.PAYMENTINFO_0_PAYMENTSTATUS;
 			var is = (data.PAYMENTINFO_0_PAYMENTSTATUS || '').toLowerCase();
 			data.success = data.ACK.toLowerCase() === 'success' && (is === 'completed' || is === 'processed' || is === 'pending');
